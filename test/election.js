@@ -40,8 +40,29 @@ contract("Election", function(accounts) {
     }).then(function(candidate) {
       var voteCount = candidate[0];
       assert.equal(voteCount, 1, "increments the candidate's vote count");
+    });
+  });
+/*
+  it("appends voters array", function() {
+    return Election.deployed().then(function(instance) {
+      electionInstance = instance;
+      return electionInstance.candidates(1);
+      return electionInstance.vote(candidateId, { from:accounts[0] });
+    }).then(function(appendsval) {
+      var size_of_array = cand
+    })
+  });*/
+
+  it("appends array with addresses", function() {
+    return Election.deployed().then(function(instance) {
+      electionInstance = instance;
+      return electionInstance.candidates(1);
+    }).then(function(candidate) {
+      var size_of_c_array = c1_voters.length;
+      assert.equal(size_of_c_array, 1, "contains the correct number of voters");
     })
   });
+
 
   /*
   it("set owner", function() {

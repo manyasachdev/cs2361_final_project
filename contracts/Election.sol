@@ -10,13 +10,15 @@ contract Election {
         uint num_votes;
         uint id;
         string cname;
-        address[] c_voters;
+        //address[] c_voters;
     }
 
     mapping(uint => Candidate) public candidates;
     mapping(address => bool) public voters;
 
     uint public num_candidates;
+    address[] public c1_voters;
+    address[] public c2_voters;
 
     constructor() public {
         //console.log("Owner contract deployed by:", msg.sender); 
@@ -39,8 +41,14 @@ contract Election {
         require(status_election == 1);
         require(!voters[msg.sender]);
         require(_cid > 0 && _cid <= num_candidates);
+        //candidates[_cid].c_voters.push(msg.sender);
+        if (_cid == 1) {
+            c1_voters.push(msg.sender);
+        }
+        else {
+            c2_voters.push(msg.sender);
+        } 
         voters[msg.sender] = true;
-        candidates[_cid].c_voters.push(msg.sender);
         candidates[_cid].num_votes ++;
     }
 
@@ -51,4 +59,5 @@ contract Election {
     function end_election () public {
         status_election = 2;
     }
+
 }
