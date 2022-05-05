@@ -1,63 +1,57 @@
 pragma solidity >=0.4.22 <0.8.0; 
+//pragma solidity 0.7.6;
 
-contract Election { 
-    //state variable- writes data into the blockchain
-    string public candidate; 
+contract Election {
     uint private status_election; //0-not started, 1-ongoing, 2-finished
     address public owner;
 
     struct Candidate {
-        uint num_votes;
         uint id;
-        string cname;
-        //address[] c_voters;
+        uint num_votes;
+        string name;
     }
-
-    mapping(uint => Candidate) public candidates;
-    mapping(address => bool) public voters;
 
     uint public num_candidates;
-    address[] public c1_voters;
-    address[] public c2_voters;
+    mapping(address => bool) public voters;
+    mapping(uint => Candidate) public candidates;
+    mapping(address => uint) public voted_for;
 
-    constructor() public {
-        //console.log("Owner contract deployed by:", msg.sender); 
+    // voted event
+    //event votedEvent (
+    //    uint indexed _candidateId
+    //);
+
+    constructor () public {
         owner = msg.sender; 
-        status_election = 1;
-        Add_Candidate("ABC");
-        Add_Candidate("XYZ");
+        status_election = 0;
+        addCandidate("ABC");
+        addCandidate("XYZ");
     }
 
-    function Add_Candidate (string memory _cname) private {
-        num_candidates ++;
-        //candidates[num_candidates] = Candidate(0, num_candidates, _cname);
-        candidates[num_candidates].num_votes = 0;
-        candidates[num_candidates].id = num_candidates;
-        candidates[num_candidates].cname = _cname;
-        //candidate[num_candidates].c_voters.push(owner);
+    function addCandidate (string memory _name) private {
+        num_candidates++;
+        candidates[num_candidates] = Candidate(num_candidates, 0, _name);
     }
 
-    function vote (uint _cid) public {
+    function vote (uint _candidateId) public {
         require(status_election == 1);
         require(!voters[msg.sender]);
-        require(_cid > 0 && _cid <= num_candidates);
-        //candidates[_cid].c_voters.push(msg.sender);
-        if (_cid == 1) {
-            c1_voters.push(msg.sender);
-        }
-        else {
-            c2_voters.push(msg.sender);
-        } 
+        require(_candidateId > 0 && _candidateId <= num_candidates);
         voters[msg.sender] = true;
-        candidates[_cid].num_votes ++;
+        voted_for[msg.sender] = _candidateId;
+        candidates[_candidateId].num_votes ++;
+
+        // trigger voted event
+        //emit votedEvent(_candidateId);
     }
 
     function start_election () public {
+        require(msg.sender == owner);
         status_election = 1;
     }
 
     function end_election () public {
+        require(msg.sender == owner);
         status_election = 2;
     }
-
 }
