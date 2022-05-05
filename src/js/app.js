@@ -3,17 +3,18 @@ App = {
   contracts: {},
   account: '0x0',
 
+  //Initialize app, initialize web3
   init: function() {
     return App.initWeb3();
   },
 
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
-      // If a web3 instance is already provided by Meta Mask.
+      // Web3 provider from Meta Mask.
       App.web3Provider = web3.currentProvider;
       web3 = new Web3(web3.currentProvider);
     } else {
-      // Specify default instance if no web3 instance provided
+      // Default instance if no web3 instance provided
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       web3 = new Web3(App.web3Provider);
     }
@@ -22,6 +23,7 @@ App = {
 
   initContract: function() {
     $.getJSON("Election.json", function(election) {
+      //getJSON reads file from build/contracts directory 
       // Instantiate a new truffle contract from the artifact
       App.contracts.Election = TruffleContract(election);
       // Connect provider to interact with contract
@@ -50,19 +52,19 @@ App = {
     // Load contract data
     App.contracts.Election.deployed().then(function(instance) {
       electionInstance = instance;
-      return electionInstance.candidatesCount();
-    }).then(function(candidatesCount) {
+      return electionInstance.num_candidates();
+    }).then(function(num_candidates) {
       var candidatesResults = $("#candidatesResults");
       candidatesResults.empty();
 
-      for (var i = 1; i <= candidatesCount; i++) {
+      for (var i = 1; i <= num_cadidates; i++) {
         electionInstance.candidates(i).then(function(candidate) {
-          var id = candidate[0];
-          var name = candidate[1];
-          var voteCount = candidate[2];
+          var num_votes = candidate[0];
+          var id = candidate[1];
+          var name = candidate[2];
 
           // Render candidate Result
-          var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + voteCount + "</td></tr>"
+          var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + num_votes + "</td></tr>"
           candidatesResults.append(candidateTemplate);
         });
       }

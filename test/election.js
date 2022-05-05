@@ -13,7 +13,7 @@ contract("Election", function(accounts) {
   
   it("it initializes the candidates with the correct values", function() {
     return Election.deployed().then(function(instance) {
-      electionInstance = instance;
+      electionInstance = instance; //assigning it to variable to make it visible in the pormise chain
       return electionInstance.candidates(1);
     }).then(function(candidate) {
       assert.equal(candidate[0], 0, "contains the correct votes count");
@@ -26,7 +26,7 @@ contract("Election", function(accounts) {
         assert.equal(candidate[2], "XYZ", "contains the correct name");
     });
   });
-
+/*
   it("allows a voter to cast a vote", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
@@ -42,6 +42,7 @@ contract("Election", function(accounts) {
       assert.equal(voteCount, 1, "increments the candidate's vote count");
     });
   });
+*/
 /*
   it("appends voters array", function() {
     return Election.deployed().then(function(instance) {
@@ -52,7 +53,7 @@ contract("Election", function(accounts) {
       var size_of_array = cand
     })
   });*/
-
+/*
   it("appends array with addresses", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
@@ -62,7 +63,7 @@ contract("Election", function(accounts) {
       assert.equal(size_of_c_array, 1, "contains the correct number of voters");
     })
   });
-
+*/
 
   /*
   it("set owner", function() {
