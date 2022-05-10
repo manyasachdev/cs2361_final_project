@@ -1,5 +1,4 @@
 pragma solidity >=0.4.22 <0.8.0; 
-//pragma solidity 0.7.6;
 
 contract Election {
     uint private status_election; //0-not started, 1-ongoing, 2-finished
@@ -16,14 +15,9 @@ contract Election {
     mapping(uint => Candidate) public candidates;
     mapping(address => uint) public voted_for;
 
-    // voted event
-    //event votedEvent (
-    //    uint indexed _candidateId
-    //);
-
     constructor () public {
         owner = msg.sender; 
-        status_election = 0;
+        status_election = 1;
         addCandidate("ABC");
         addCandidate("XYZ");
     }
@@ -40,9 +34,6 @@ contract Election {
         voters[msg.sender] = true;
         voted_for[msg.sender] = _candidateId;
         candidates[_candidateId].num_votes ++;
-
-        // trigger voted event
-        //emit votedEvent(_candidateId);
     }
 
     function start_election () public {

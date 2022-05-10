@@ -9,13 +9,11 @@ App = {
 
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
-      // If a web3 instance is already provided by Meta Mask.
       App.web3Provider = window.ethereum
       web3 = new Web3(window.ethereum)
       //App.web3Provider = web3.currentProvider;
       //web3 = new Web3(web3.currentProvider);
     } else {
-      // Specify default instance if no web3 instance provided
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       web3 = new Web3(App.web3Provider);
     }
@@ -40,7 +38,6 @@ App = {
     loader.show();
     content.hide();
 
-    // Load account data
     web3.eth.getCoinbase(function(err, account) {
       if (err === null) {
         App.account = account;
@@ -48,7 +45,6 @@ App = {
       }
     });
 
-    // Load contract data
     App.contracts.Election.deployed().then(function(instance) {
       electionInstance = instance;
       return electionInstance.num_candidates();
@@ -65,7 +61,6 @@ App = {
           var num_votes = candidate[1];
           var cname = candidate[2];
 
-          // Render candidate Result
           var candidateTemplate = "<tr><th>" + id + "</th><td>" + cname + "</td><td>" + num_votes + "</td></tr>"
           candidatesResults.append(candidateTemplate);
 
@@ -73,7 +68,6 @@ App = {
           candidatesSelect.append(candidateOption);
         });
       }
-
       return electionInstance.voters(App.account);
     }).then(function(hasVoted) {
       if(hasVoted) {
@@ -92,13 +86,12 @@ App = {
       electionInstance = instance;
       return electionInstance.vote(candidateId, { from: App.account });
     }).then(function(result) {
-      // Wait for votes to update
       $("#content").hide();
       $("#loader").show();
     }).catch(function(err) {
       console.error(err);
     });
-  },
+  }
 };
 
 $(function() {
