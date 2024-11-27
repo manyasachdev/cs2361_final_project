@@ -12,7 +12,7 @@ My chosen project topic addresses the voting system currently in place in India.
 The Goal of this project is to create a secure voting platform to facilitate elections. Currently, the aim is to simply build a platform that would be good for one election. However, in time, I will attempt to restructure the application in a way such that a particular user can use this platform to contest their own small scale election. This can then be used in educational institutes, housing societies, corporates etc.
 
 
-3 - Plan of action
+3 - Plan of Action
 - Install Ganache from the Truffle suit to initiate a personal blockchain to be used for testing and modifying code till final deployment.
 - Gradually write the smart contract to facilitate the basic function of the application - casting votes.
 - Present the program, gain feedback and add additional features.
@@ -48,6 +48,11 @@ This project attempts to use blockchain’s features to overcome some of the sho
 3. Immutable transactions - Consensus protocol makes it hard if not impossible for hackers to gain access into the blockchain and change votes that have already been cast and recorded.
 
 
-6 - Resources
+6 - Project Presentation
+
+https://github.com/manyasachdev/cs2361_final_project/blob/03768f44c110d4678d70b717e3b5af404fa41d9b/CS2361-Presentation_Manya_Sachdev.pdf
+
+
+7 - Resources
 - https://www.brookings.edu/blog/techtank/2019/12/06/how-electronic-voting-machineshave-improved-indias-democracy/
 - https://developer.ibm.com/patterns/how-to-create-a-secure-e-voting-application-onhyperledger-fabric/
