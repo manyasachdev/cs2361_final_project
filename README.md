@@ -1,4 +1,6 @@
-"# cs2361_final_project" 
+"# CS2361_final_project" 
+
+DECENTRALIZED VOTING APPLICATION
 
 1 - Introduction
 My chosen project topic addresses the voting system currently in place in India. Traditionally, voting took place by means of paper ballots. Up until the 1990s, every eligible individual would have to manually mark their desired candidate on a piece of paper and then place this paper in a locked box. Once all votes had been cast, the paper ballots would all be counted one-by-one across the nation. The manual counting of individual slips of paper made the process of getting to the final tally very lengthy. Further, the simple nature of this method made it prone to attacks and fraudulent practices such as stuffing fake ballots into a box. This led to casting of fake votes with no traceable means to connect vote to voter. The late 1990s and early 2000s saw the introduction of EVMs - Electronic Voting Machines - in India. Bharat Electronics and the Electronics Corporation of India worked together to launch these in the country. EVMs were a big technological advancement for India and were highly regarded as malpractice proof due to their digital nature. Additionally, in 2019, a VVPAT - voter verified paper audit trail - system was installed in all EVMs to fix the issue of certain votes not being cast by the EVM. Voting is a direct means of exercising our democratic right. Hence, it is imperative to make efforts to make the process more secure and robust every election.
